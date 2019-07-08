@@ -1,0 +1,19 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: openjdk
+    tag: 12.0-jdk
+
+inputs:
+  - name: spring-boot-hello-repo
+
+run:
+  path: "spring-boot-hello-repo/gradlew"
+  args: ["--build-file", "spring-boot-hello-repo/build.gradle", "build"]
+
+params:
+  TERM: -dumb
+  GRADLE_OPTS: -Dorg.gradle.native=false
+  JAVA_OPTS: -Dhttp.proxyHost=isa-test-out.onefiserv.net -Dhttp.proxyPort=8080 -Dhttps.proxyHost=isa-test-out.onefiserv.net -Dhttps.proxyPort=8080
